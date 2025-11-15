@@ -4,11 +4,11 @@ import { useNotes } from "../../context/context";
 import { NotesCard } from "../../components/notescard";
 import { Footer } from "../../components/footer";
 
-export const Archive = () => {
+export const Important = () => {
 
-    const {archive} =useNotes();
+    const {important} =useNotes();
 
-    // console.log(archive)
+    console.log(important)
   return (
     <div>
       <Navbar />
@@ -16,8 +16,8 @@ export const Archive = () => {
         <SideBar />
         <div>
           <div className="flex mt-2 flex-wrap gap-3">
-            {archive?.length > 0 &&
-              archive.map(({ id, title, text, isPinned }) => (
+            {important?.length > 0 &&
+              important.map(({ id, title, text, isPinned }) => (
                 <NotesCard
                   key={id}
                   id={id}

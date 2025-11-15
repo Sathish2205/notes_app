@@ -39,7 +39,7 @@ export const notesReducer = (state, { type, payload }) => {
         ...state,
         archive: [
           ...state.archive,
-          state.notes.find(({ id }) => id == payload.id),
+          state.notes.find(({ id }) => id === payload.id),
         ],
         notes: state.notes.filter(({ id }) => id !== payload.id),
       };
@@ -48,9 +48,40 @@ export const notesReducer = (state, { type, payload }) => {
         ...state,
         notes: [
           ...state.notes,
-          state.archive.find(({ id }) => id == payload.id)
+          state.archive.find(({ id }) => id === payload.id),
         ],
         archive: state.archive.filter(({ id }) => id !== payload.id),
+      };
+    case "DELETE":
+      return {
+        ...state,
+        bin: [...state.bin, state.notes.find(({ id }) => id === payload.id)],
+        notes: state.notes.filter(({ id }) => id !== payload.id),
+      };
+    case "DELETE_FROM_ARCHIVE":
+      return {
+        ...state,
+        bin: [...state.bin, state.archive.find(({ id }) => id === payload.id)],
+        archive: state.archive.filter(({ id }) => id !== payload.id),
+      };
+    case "REMOVE_FROM_BIN":
+      return {
+        ...state,
+        bin: state.bin.filter(({ id }) => id !== payload.id),
+      };
+    case "ADD_TO_IMPORTANT":
+      return {
+        ...state,
+        important: [
+          ...state.important,
+          state.notes.find(({ id }) => id === payload.id),
+        ],
+      };
+
+    case "REMOVE_FROM_IMPORTANT":
+      return {
+        ...state,
+        important: state.important.filter(({ id }) => id !== payload.id),
       };
 
     default:

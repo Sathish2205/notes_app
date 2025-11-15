@@ -4,9 +4,10 @@ import { SideBar } from "../../components/sidebar";
 import { notesReducer } from "../../reducers/notesReducer";
 import { NotesCard } from "../../components/notescard";
 import { useNotes } from "../../context/context";
+import { Footer } from "../../components/footer";
 
 export const Home = () => {
-  const { title, text, notes,archive, notesDispatch } = useNotes();
+  const { title, text, notes, archive, notesDispatch } = useNotes();
 
   const onTitleChange = (e) => {
     notesDispatch({
@@ -38,9 +39,9 @@ export const Home = () => {
   return (
     <>
       <Navbar />
-      <main className="flex gap-3">
+      <main className="flex  gap-3">
         <SideBar />
-        <div className="flex flex-col w-screen">
+        <div className="flex w-screen flex-col">
           <div className="flex flex-col w-[450px] border mt-6 h-20 relative self-center">
             <input
               value={title}
@@ -59,7 +60,7 @@ export const Home = () => {
               disabled={title.length == 0}
               className="w-7 h-7 absolute bottom-0 right-0 border bg-indigo-800 text-slate-50 rounded-full"
             >
-              <i class="fa-solid fa-plus"></i>
+              <span class="material-icons">add</span>
             </button>
           </div>
           {pinnedNotes?.length > 0 && (
@@ -98,6 +99,7 @@ export const Home = () => {
           )}
         </div>
       </main>
+      <Footer/>
     </>
   );
 };
